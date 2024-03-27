@@ -15,7 +15,7 @@ public class Principal {
 		Scanner scanner = new Scanner(System.in); // FAZ A LEITURA DOS DADOS DE ENTRADA
 		Cofrinho cofrinho = new Cofrinho(); // CRIA UMA INSTÂNCIA DA CLASSE COFRINHO E A ASSOCIA À VARIÁVEL COFRINHO
 
-		System.out.println("Cofrinho de Moedas 💵🐖");
+		System.out.println("💵 Cofrinho de Moedas 🐖");
 		// MENU DE OPÇÕES EM LOOP PARA O USUÁRIO ESCOLLHER A CADA INTERAÇÃO
 		while (true) {
 			System.out.println("\n ***** Menu *****" + "\n " 
@@ -27,19 +27,30 @@ public class Principal {
 					+ "Escolha uma opção: ");
 			int opcao = scanner.nextInt(); // LÊ A OPÇÃO ESCOLHIDA PELO USUÁRIO E GUARDA NA VARIÁVEL OPCAO
 
-			// USANDO PRIMEIRO SWITCH CASE PARA VERIFICAR A OPÇÃO QUE O USUÁRIO ESCOLHEU NO
-			// MENU
+			// O SWITCH CASE EXTERNO VERIFICA A OPÇÃO QUE O USUÁRIO ESCOLHEU NO MENU.
 			switch (opcao) {
-			case 1: // ADICIONAR UMA MOEDA AO COFRINHO.
-				System.out.println("Escolha a moeda (1. Dólar, 2. Euro, 3. Real): "); // DÁ AS OPÇÕES DOS TIPOS DE MOEDA
-																						// PARA ADICIONAR
-				int escolhaMoeda = scanner.nextInt();
+			/*
+			 * ADICIONA UMA MOEDA AO COFRINHO:
+			 * DO WHILE FAZ UM TRATAMENTO DE ERRO, IMPOSSIBILITANDO O USUÁRIO DE PROSSEGUIR 
+			 * SE FOR DIGITADO UM VALOR DIFERENTE DE 1,2 OU 3. 
+			 * REPETINDO ATÉ QUE UMA OPÇÃO VÁLIDA DE MOEDA SEJA ESCOLHIDA
+			 */
+			case 1: 
+				int escolhaMoeda;
+				do {
+					System.out.println("Escolha a moeda (1. Dólar, 2. Euro, 3. Real): "); // DÁ AS OPÇÕES DOS TIPOS DE MOEDA																		// PARA ADICIONAR
+					escolhaMoeda = scanner.nextInt();
+					if (escolhaMoeda < 1 || escolhaMoeda > 3) {
+						 System.out.println("Por favor, escolha uma opção válida (1, 2 ou 3).");
+					}
+				} while (escolhaMoeda < 1 || escolhaMoeda > 3);
+
 				System.out.print("Informe o valor da moeda: "); // E SOLICITA O VALOR DA MOEDA.
 				double valorMoeda = scanner.nextDouble();
-				Moeda novaMoeda = null; // A VARIÁVEL NOVAMOEDA INICIALIZADA COM NULL SERÁ USADA PARA ARMAZENAR A NOVA
-										// MOEDA A SER CRIADA.
+				Moeda novaMoeda = null; // A VARIÁVEL NOVAMOEDA INICIALIZADA COM NULL É USADA PARA ARMAZENAR A NOVA MOEDA.
+										
 				/*
-				 * O SWITCH INTERNO VERIFICA QUAL OPÇÃO DE MOEDA O USUÁRIO ESCOLHEU E CRIA UMA
+				 * O SWITCH CASE INTERNO VERIFICA QUAL OPÇÃO DE MOEDA O USUÁRIO ESCOLHEU E CRIA UMA
 				 * INSTÂNCIA DA CLASSE CORRESPONDENTE (DOLAR, EURO OU REAL) COM O VALOR
 				 * FORNECIDO PELO USUÁRIO. SE O USUÁRIO ESCOLHER UMA OPÇÃO VÁLIDA, ENTÃO
 				 * NOVAMOEDA SERÁ DIFERENTE DE NULL E UMA NOVA INSTÂNCIA DE MOEDA SERÁ CRIADA.
@@ -54,38 +65,43 @@ public class Principal {
 				case 3:
 					novaMoeda = new Real(valorMoeda);
 					break;
-				default: // TRATAMENTO DE ERRO
-					System.out.println("Opção inválida! Por favor, escolha uma opção válida (1, 2 ou 3)");
+				default:
+					System.out.println("Opção inválida!");
 				}
-				if (novaMoeda != null) { // SE NOVAMOEDA NÃO FOR NULL, ENTÃO ADICIONA ESSA MOEDA AO COFRINHO USANDO O
-											// MÉTODO ADICIONAR DA CLASSE COFRINHO.
+				if (novaMoeda != null) { // SE NOVAMOEDA NÃO FOR NULL, ENTÃO ADICIONA ESSA MOEDA AO COFRINHO 
+											// USANDO O MÉTODO ADICIONAR NA CLASSE COFRINHO.
 					cofrinho.adicionar(novaMoeda);
-					System.out.println("Moeda adicionada com sucesso!💲");
+					System.out.println("💲Moeda adicionada com sucesso!");
 				}
 				break;
-			case 2: // REMOVENDO MOEDA
-				// SOLICITA AO USUÁRIO O ÍNDICE DA MOEDA A SER REMOVIDA E VERIFICA SE O ÍNDICE É
-				// VÁLIDO ANTES DE REMOVER
-				System.out.println("Digite o índice da moeda que deseja remover: ");
-				cofrinho.listagemMoedas(); // EXIBE O ÍNDICE DE MOEDAS PRESENTES NO COFRINHO
-				int indiceMoeda = scanner.nextInt();
-
-				if (indiceMoeda >= 0 && indiceMoeda < cofrinho.getListaMoedas().size()) {
-					Moeda moedaRemover = cofrinho.getListaMoedas().get(indiceMoeda);
-					cofrinho.remover(moedaRemover);
-					System.out.println("Moeda removida com sucesso!");
-				} else {
-					System.out.println("Índice inválido! ⚠️"); // SE A OPÇÃO ESCOLHIDA NÃO FOR VÁLIDA (FOR DIFERENTE DE
-																// 1, 2 OU 3), ESSA MENSAGEM DE ERRO SERÁ EXIBIDA.
-				}
+				/*
+				 * REMOVENDO MOEDA:
+				 * SOLICITA AO USUÁRIO O ÍNDICE DA MOEDA A SER REMOVIDA 
+				 * E VERIFICA SE O ÍNDICE É VÁLIDO ANTES DE REMOVER
+				 */
+			case 2:
+				int indiceMoeda = 0;
+				do {
+					System.out.println("Digite o índice da moeda que deseja remover: ");
+					cofrinho.listagemMoedas(); // EXIBE O ÍNDICE DE MOEDAS PRESENTES NO COFRINHO
+					indiceMoeda = scanner.nextInt();
+					if (indiceMoeda < 0 || indiceMoeda >= cofrinho.getListaMoedas().size()) {
+						System.out.println("⚠️ Índice inválido!  Escolha um índice existente.");// EXIBE ESSA MENSAGEM SE A OPÇÃO ESCOLHIDA NÃO FOR VÁLIDA.															
+					}
+				} while (indiceMoeda < 0 || indiceMoeda >= cofrinho.getListaMoedas().size());
+				
+				// QUANDO O NÚMERO DO ÍNDICE É VÁLIDO REMOVE A MOEDA.
+				Moeda moedaRemover = cofrinho.getListaMoedas().get(indiceMoeda);
+				cofrinho.remover(moedaRemover);
+				System.out.println("Moeda removida com sucesso!");
 				break;
 			case 3:
 				cofrinho.listagemMoedas();
 				break;
 			/*
-			 * CHAMA O MÉTODO TOTALCONVETIDO NA CLASSE COFRINHO QUE TRAZ O MONTANTE TOTAL EM
-			 * REAIS, O MÉTODO STRING FORMAT FORMATA A SAÍDA COM 2 CASAS DECIMAIS APÓS A
-			 * VIRGULA.
+			 * MOSTRA O TOTAL DE DINHEIRO DO COFRINHO:
+			 * CHAMA O MÉTODO TOTALCONVETIDO NA CLASSE COFRINHO QUE TRAZ O MONTANTE TOTAL JÁ CONVERTIDO
+			 *  EM REAIS, O MÉTODO STRING FORMAT FORMATA A SAÍDA COM 2 CASAS DECIMAIS APÓS A VIRGULA.
 			 */
 			case 4:
 				System.out
@@ -96,7 +112,7 @@ public class Principal {
 				scanner.close();
 				System.exit(0);
 			default:
-				System.out.println("Opção inválida! ❌"); // MOSTRA ESSA MENSAGEM SE O USUÁRIO DIGITAR UMA OPÇÃO INVÁLIDA
+				System.out.println("❌ Opção inválida! Escolha uma das opções do menu"); // MOSTRA ESSA MENSAGEM SE O USUÁRIO DIGITAR UMA OPÇÃO INVÁLIDA
 			}
 		}
 	}

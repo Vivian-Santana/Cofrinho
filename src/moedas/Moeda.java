@@ -4,7 +4,7 @@ package moedas;
 public abstract class Moeda {
 
 	protected double valor;
-	protected int numero; // A VARIÁVEL QUE ARMAZENA O NUMERO ÍNDICE DE MOEDAS
+	protected int numero; // A VARIÁVEL QUE ARMAZENA O NUMERO DE ÍNDICE DE MOEDAS
 
 	protected Moeda(double valor) {
 		super();
@@ -17,8 +17,7 @@ public abstract class Moeda {
 	// MÉTODO ABSTRATO PARA CONVERTER O VALOR DA MOEDA PARA REAL
 	public abstract double converter();
 
-	// MÉTODOS GET E SET PARA PEGAR E SETTAR NUMEROS DE ÍNDICES PARA AS POSIÇÕES DAS
-	// MOEDAS.
+	// MÉTODOS GET E SET PARA PEGAR E SETTAR RESPECTIVAMENTE NUMEROS DE ÍNDICES PARA AS POSIÇÕES DAS MOEDAS.
 	public int getNumero() {
 		return numero;
 	}

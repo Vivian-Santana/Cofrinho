@@ -25,13 +25,15 @@ public class Cofrinho {
 		getListaMoedas().remove(moeda);
 	}
 
-	// MÉTODO PARA LISTAR TODAS AS MOEDAS NO COFRINHO E O LAÇO FOR ADICIONA UM
-	// NÚMERO DE ÍNDICE PARA AS POSIÇÕES DAS MOEDAS.
+	/*
+	 * O IF VERRIFICA SE A LISTAMOEDAS ESTÁ VAZIA, SE ESTIVER MOSTRA A MENSAGEM QUE O COFRINHO ESTÁ VAZIO,
+	 *  SE NÃO ESTIVER LISTA TODAS AS MOEDAS E O LAÇO FOR ADICONA UM NÚMERO DE ÍNDICE PARA AS POSIÇÕES DAS MOEDAS.
+	 */
 	public void listagemMoedas() {
-		System.out.println("\n" + "Moedas no cofrinho 💰:");
+		System.out.println("\n" + "💰 Moedas no cofrinho :");
 
 		if (getListaMoedas().isEmpty()) {
-			System.out.println("O cofrinho está vazio! 💸");
+			System.out.println("💸 O cofrinho está vazio! ");
 		} else {
 			for (int i = 0; i < getListaMoedas().size(); i++) {
 				Moeda moeda = getListaMoedas().get(i);
@@ -51,7 +53,7 @@ public class Cofrinho {
 	}
 
 	/*
-	 * O MÉTODO GET, RETORNA O VALOR ATUAL DO ATRIBUTO LISTAMOEDAS, UM OBJETO DO
+	 * O MÉTODO GET, RETORNA O VALOR ATUAL DO ATRIBUTO LISTAMOEDAS EM UM OBJETO DO
 	 * TIPO ARRAYLIST<MOEDA>, QUE É A LISTA DE MOEDAS ATUAL NO COFRINHO. ESSE MÉTODO
 	 * PERMITE QUE OUTRAS PARTES DO CÓDIGO OBTENHAM ACESSO À LISTA DE MOEDAS ATUAL
 	 * NO COFRINHO PARA VISUALIZAÇÃO OU MANIPULAÇÃO.
@@ -62,8 +64,8 @@ public class Cofrinho {
 
 	/*
 	 * O MÉTODO SET DEFINE O VALOR DO ATRIBUTO LISTAMOEDAS. ELE RECEBE COMO
-	 * ARGUMENTO UM OBJETO DO TIPO ARRAYLIST<MOEDA>, QUE CONTÉM A NOVA LISTA DE
-	 * MOEDAS A SER DEFINIDA NO COFRINHO PERMITE QUE OUTRAS PARTES DO CÓDIGO DEFINAM
+	 * PARÂMETRO UM OBJETO DO TIPO ARRAYLIST<MOEDA>, QUE CONTÉM A NOVA LISTA DE
+	 * MOEDAS A SER DEFINIDA NO COFRINHO E PERMITE QUE OUTRAS PARTES DO CÓDIGO DEFINAM
 	 * UMA NOVA LISTA DE MOEDAS PARA O COFRINHO, ATUALIZANDO A LISTA DE MOEDAS.
 	 */
 	public void setListaMoedas(ArrayList<Moeda> listaMoedas) {
