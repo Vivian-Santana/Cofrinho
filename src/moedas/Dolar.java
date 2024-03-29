@@ -1,5 +1,7 @@
 package moedas;
 
+import java.text.DecimalFormat;
+
 // CLASSE DOLAR - FILHA DE MOEDA
 public class Dolar extends Moeda {
 
@@ -13,7 +15,9 @@ public class Dolar extends Moeda {
 	 */
 	@Override
 	public void info() {
-		System.out.println("Moeda: Dólar - Valor: " + valor);
+		DecimalFormat df = new DecimalFormat("#.00"); //FORMATA O VALOR PARA 2 CASAS DECIMAIS APÓS A VÍRGULA.
+	    String valorFormatado = df.format(valor);
+		System.out.println("Moeda: Dólar - Valor: " + valorFormatado);
 	}
 
 	@Override

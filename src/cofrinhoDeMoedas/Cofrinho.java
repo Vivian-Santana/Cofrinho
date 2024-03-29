@@ -6,47 +6,49 @@ import moedas.Moeda;
 public class Cofrinho {
 
 	private ArrayList<Moeda> listaMoedas;
-	private int proximoIndice; // VARIÁVEL QUE CRIA NÚMEROS DE ÍNDICE PARA CADA MOEDA ADICIONADA
 
 	// CRIA UM ARRAY LIST PARA AS MOEDAS
 	public Cofrinho() {
 		this.setListaMoedas(new ArrayList<Moeda>());
-		proximoIndice = 1;
 	}
 
-	// MÉTODO PARA ADICIONAR MOEDA AO COFRINHO
+	// MÉTODO PARA ADICIONAR MOEDAS AO COFRINHO
 	public void adicionar(Moeda moeda) {
-		getListaMoedas().add(moeda);
-		moeda.setNumero(proximoIndice++); // ATRIBUI O PRÓXIMO NÚMERO SEQUENCIAL À MOEDA ADICIONADA
+		listaMoedas.add(moeda);
 	}
 
-	// MÉTODO PARA REMOVER MOEDA ESPECÍFICA DO COFRINHO
-	public void remover(Moeda moeda) {
-		getListaMoedas().remove(moeda);
+	// MÉTODO PARA REMOVER UMA MOEDA ESPECÍFICA DO COFRINHO
+	public void remover(int indice) {
+		listaMoedas.remove(indice);
 	}
 
 	/*
 	 * O IF VERRIFICA SE A LISTAMOEDAS ESTÁ VAZIA, SE ESTIVER MOSTRA A MENSAGEM QUE O COFRINHO ESTÁ VAZIO,
-	 *  SE NÃO ESTIVER LISTA TODAS AS MOEDAS E O LAÇO FOR ADICONA UM NÚMERO DE ÍNDICE PARA AS POSIÇÕES DAS MOEDAS.
+	 *  SE NÃO ESTIVER, LISTA TODAS AS MOEDAS E O LAÇO FOR ADICONA UM NÚMERO DE ÍNDICE PARA AS POSIÇÕES DAS MOEDAS.
 	 */
 	public void listagemMoedas() {
 		System.out.println("\n" + "💰 Moedas no cofrinho :");
 
-		if (getListaMoedas().isEmpty()) {
+		if (listaMoedas.isEmpty()) {
 			System.out.println("💸 O cofrinho está vazio! ");
 		} else {
-			for (int i = 0; i < getListaMoedas().size(); i++) {
-				Moeda moeda = getListaMoedas().get(i);
-				System.out.print("Índice: " + i + " - ");
+			for (Moeda moeda: listaMoedas) {
+				int indice = listaMoedas.indexOf(moeda);
+				System.out.print("Índice: " + indice + " - ");
 				moeda.info();
 			}
 		}
 	}
 
-	// MÉTODO PARA CALCULAR O TOTAL CONVERTIDO PARA REAIS
+	/* 
+	 * NO MÉTODO PARA CALCULAR O TOTAL CONVERTIDO PARA REAIS O LOOP FOR ESTÁ ITERANDO SOBRE A COLEÇÃO LISTAMOEDAS, QUE CONTÉM 
+	 * OBJETOS DO TIPO MOEDA. PARA CADA MOEDA NA LISTA, O MÉTODO CONVERTER() É CHAMADO E O VALOR RETORNADO É SOMADO AO TOTAL. 
+	 * AO FINAL DO LOOP, O TOTAL ACUMULADO É RETORNADO COMO O RESULTADO DO MÉTODO.
+	 */
+	
 	public double totalConvertido() {
 		double total = 0;
-		for (Moeda moeda : getListaMoedas()) {
+		for (Moeda moeda : listaMoedas) {
 			total += moeda.converter();
 		}
 		return total;
