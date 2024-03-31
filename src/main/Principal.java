@@ -90,19 +90,24 @@ public class Principal {
 			 * VERIFICA SE O ÍNDICE É VÁLIDO ANTES DE REMOVER
 			 */
 			case 2:
-				int indiceMoeda = 0;
-				do {
-					System.out.println("Digite o índice da moeda que deseja remover: ");
-					cofrinho.listagemMoedas(); // EXIBE O ÍNDICE DE MOEDAS PRESENTES NO COFRINHO
-					indiceMoeda = scanner.nextInt();
-					if (indiceMoeda < 0 || indiceMoeda >= cofrinho.getListaMoedas().size()) {
-						System.out.println("⚠️ Índice inválido!  Escolha um índice existente.");
-					}
-				} while (indiceMoeda < 0 || indiceMoeda >= cofrinho.getListaMoedas().size());
+				if (cofrinho.getListaMoedas().isEmpty()) {
+					System.out.println("💸 O cofrinho está vazio!");
+				} else {
+					int indiceMoeda = 0;
+					do {
+						System.out.println("Digite o índice da moeda que deseja remover: ");
+						cofrinho.listagemMoedas(); // EXIBE O ÍNDICE DE MOEDAS PRESENTES NO COFRINHO
+						indiceMoeda = scanner.nextInt();
+						if (indiceMoeda < 0 || indiceMoeda >= cofrinho.getListaMoedas().size()) {
+							System.out.println("⚠️ Índice inválido!  Escolha um índice existente.");
+						}
+					} while (indiceMoeda < 0 || indiceMoeda >= cofrinho.getListaMoedas().size());
 
-				// QUANDO O NÚMERO DO ÍNDICE É VÁLIDO REMOVE A MOEDA.
-				cofrinho.remover(indiceMoeda);
-				System.out.println("Moeda removida com sucesso!");
+					// QUANDO O NÚMERO DO ÍNDICE É VÁLIDO REMOVE A MOEDA.
+					cofrinho.remover(indiceMoeda);
+					System.out.println("Moeda removida com sucesso!");
+				}
+
 				break;
 			case 3:
 				cofrinho.listagemMoedas();
